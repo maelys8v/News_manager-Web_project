@@ -1,0 +1,2 @@
+.form-control.ng-valid   { border: 10px solid rgb(0, 166, 0); }
+.form-control.ng-invalid { border: 10px solid rgb(255, 221, 83); }

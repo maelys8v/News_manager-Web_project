@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Article } from './article';
+import { Article } from '../interfaces/article';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginService } from './login.service';
+//import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class NewsService {
 
   // Set the corresponding APIKEY according to the received by email
   private APIKEY: string | null;
-  private APIKEY_ANON = 'APKG_6397_3_20';
+  private APIKEY_ANON = 'APKG_5508_3_10';
 
   private httpOptions = {
     headers: new HttpHeaders({
