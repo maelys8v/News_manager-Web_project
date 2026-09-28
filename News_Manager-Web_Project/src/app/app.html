@@ -1,1 +1,38 @@
-<app-article-list></app-article-list>
+<nav class="navbar">
+    <div class="navbar-container container">
+        <input type="checkbox" name="" id="">
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+        <ul class="menu-items">
+            <li><a routerLink="/list">All</a></li>
+            <li><a routerLink="/list/national">National</a></li>
+            <li><a routerLink="/list/technology">Technology</a></li>
+            <li><a routerLink="/list/economy">Economy</a></li>
+            <li><a routerLink="/list/sports">Sports</a></li>
+        </ul>
+
+
+
+<router-outlet></router-outlet>
+        <h1 class="logo">News paper main page</h1>
+    </div>
+</nav>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h6>router-outlet</h6>
+<router-outlet></router-outlet>
+
+
+<!-- not needed thanks to the router outlet
+<h6>app-article-list</h6>
+<app-article-list></app-article-list> -->
+

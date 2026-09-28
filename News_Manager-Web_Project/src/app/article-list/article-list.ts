@@ -8,14 +8,18 @@ import { ChangeDetectorRef } from '@angular/core'; // to correct the delay issue
 import { NewsService } from '../services/news'
 import { Observable, of } from 'rxjs';
 
+import { ActivatedRoute, Router, NavigationExtras,RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
+
+
 @Component({
-  imports: [CommonModule, FormsModule, Highlight],
+  imports: [CommonModule, FormsModule, Highlight, RouterLink],
   standalone: true,
   selector: 'app-article-list',
   styleUrl: './article-list.css',
   templateUrl: './article-list.html',
 })
-export class ArticleList{ //implements OnInit {
+export class ArticleList implements OnInit {
 
   article: Article = {
     title: "",
@@ -28,15 +32,41 @@ export class ArticleList{ //implements OnInit {
     update_date: Date.now(),
   };
 
-  articles = new Observable<Article[]>; // The list of articles -> add 3 hard ones in the constructor
-
+  //articles = new Observable<Article[]>; // The list of articles -> add 3 hard ones in the constructor
+  private allArticles: Article[] = [];
+  articles: Article[] = [];
+  private category: string | null = null;
 
   @ViewChild('articleForm') articleForm: any;
 
-  constructor(private cdr: ChangeDetectorRef, private articleService : NewsService) { // ChangeDetectorRef to correct the delay issue when publishing
-    this.articles = articleService.getArticles();       
+  constructor(
+    private cdr: ChangeDetectorRef, 
+    private articleService : NewsService,
+    private route: ActivatedRoute, 
+    private location: Location,
+    private router: Router,
+    private newsService: NewsService) {}
+  
+  ngOnInit() {
+    // load once
+    this.newsService.getArticles().subscribe(list => {
+      this.allArticles = list;
+      this.applyFilter();
+    });
+
+    // react every time the URL category changes
+    this.route.paramMap.subscribe(params => {
+      this.category = params.get('category');   // null on /list
+      this.applyFilter();
+    });
   }
 
+  private applyFilter() {
+    this.articles = this.category
+      ? this.allArticles.filter(
+          a => a.category.toLowerCase() === this.category!.toLowerCase())
+      : this.allArticles;
+  }
 
 
 

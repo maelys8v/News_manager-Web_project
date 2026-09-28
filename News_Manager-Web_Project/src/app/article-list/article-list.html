@@ -1,5 +1,40 @@
-<h2> Article form </h2>
+<button type="button" class="btn btn-secondary" (click)="clear()">Create new article (link to a form)</button>
 
+<div class="container mt-5">
+  <div class="row">
+    @for (a of articles; track a.id) {
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+
+          @if (a.thumbnail_data) {
+            <a [routerLink]="['/detail', a.id]">
+              <img class="card-img-top"
+                   [src]="'data:' + a.thumbnail_media_type + ';base64,' + a.thumbnail_data">
+            </a>
+          }
+
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [routerLink]="['/detail', a.id]">{{ a.title }}</a>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ a.subtitle }}</h6>
+            <p class="fw-bold">{{ a.category }}</p>
+            <p class="card-text">{{ a.abstract }}</p>
+          </div>
+
+          <div class="card-footer">
+            <button class="btn btn-primary btn-sm me-1"
+                    [routerLink]="['/edit', a.id]">Edit</button>
+            <button class="btn btn-danger btn-sm">Remove</button>
+          </div>
+
+        </div>
+      </div>
+    } @empty {
+      <p>No articles in this category.</p>
+    }
+  </div>
+</div>
 <!-- <form #articleForm="ngForm" (ngSubmit)="addArticle()">
     
     <div class="form-group">

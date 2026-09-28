@@ -1,24 +1,14 @@
-// export interface Article {
-//   title: string;
-//   subtitle: string;
-//   body: string;
-//   abstract: string;
-//   category: 'National' | 'Technology' | 'Sports' | 'Economy';
-//   id: number;
-//   show: null | 1;
-//   user: string;
-//   date: number;
-// }
-
 export interface Article {
-id: string;
-id_user: string;
-title: string;
-subtitle: string;
-body: string;
-abstract: string;
-category: 'National' | 'Technology' | 'Sports' | 'Economy';
-update_date: number
-//image_data
-//image_media_type
+    id: string;
+    id_user: string;
+    title: string;
+    subtitle: string;
+    body: string;
+    abstract: string;
+    category: 'National' | 'Technology' | 'Sports' | 'Economy';
+    update_date: number
+    image_data?: string;            // single article requests (details/edit)
+    image_media_type?: string;
+    thumbnail_data?: string;        // list requests (main page)
+    thumbnail_media_type?: string;
 }
