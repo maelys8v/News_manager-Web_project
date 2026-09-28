@@ -69,6 +69,7 @@ export class ArticleList implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.category = params.get('category');   // null on /list
       this.applyFilter();
+      this.cdr.detectChanges();
     });
   }
 
