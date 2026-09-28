@@ -6,10 +6,10 @@
       <div class="col-md-4 mb-4">
         <div class="card h-100 text-center">
 
-          @if (a.thumbnail_data) {
+          @if (a.thumbnail_image) {
             <a [routerLink]="['/detail', a.id]">
               <img class="card-img-top"
-                   [src]="'data:' + a.thumbnail_media_type + ';base64,' + a.thumbnail_data">
+                   [src]="'data:' + a.thumbnail_media_type + ';base64,' + a.thumbnail_image">
             </a>
           }
 
@@ -19,7 +19,7 @@
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ a.subtitle }}</h6>
             <p class="fw-bold">{{ a.category }}</p>
-            <p class="card-text">{{ a.abstract }}</p>
+            <p class="card-text" [innerHTML]="a.abstract"></p>
           </div>
 
           <div class="card-footer">

@@ -7,8 +7,12 @@ export interface Article {
     abstract: string;
     category: 'National' | 'Technology' | 'Sports' | 'Economy';
     update_date: number
-    image_data?: string;            // single article requests (details/edit)
-    image_media_type?: string;
-    thumbnail_data?: string;        // list requests (main page)
+
+    thumbnail_image?: string;
     thumbnail_media_type?: string;
+    image_data?: string;
+    image_media_type?: string;
+    username?: string;
+    is_public?: boolean;
+    is_deleted?: boolean;
 }

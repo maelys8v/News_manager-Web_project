@@ -48,10 +48,21 @@ export class ArticleList implements OnInit {
     private newsService: NewsService) {}
   
   ngOnInit() {
+    console.log('init');
+    
     // load once
-    this.newsService.getArticles().subscribe(list => {
-      this.allArticles = list;
-      this.applyFilter();
+    this.newsService.getArticles().subscribe({
+      next: (list) => {
+        console.log('réponse API :', list);
+        console.log(Object.keys(list[0]));
+        this.allArticles = list;
+        this.applyFilter();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+        window.alert('Impossible de charger les articles');
+      }
     });
 
     // react every time the URL category changes
