@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-secondary" (click)="clear()">Create new article (link to a form)</button>
+<button type="button" class="btn btn-add" style="margin-left: 100px;" (click)="clear()">Create new article (link to a form)</button>
 
 <div class="container mt-5">
   <div class="row">
@@ -23,9 +23,9 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm me-1"
+            <button class="btn btn-edit btn-sm me-1"
                     [routerLink]="['/edit', a.id]">Edit</button>
-            <button class="btn btn-danger btn-sm">Remove</button>
+            <button class="btn btn-remove btn-sm">Remove</button>
           </div>
 
         </div>
