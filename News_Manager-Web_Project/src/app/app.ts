@@ -1,12 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { ArticleList } from './article-list/article-list';
-
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
-import { Location } from '@angular/common';
+//import { ArticleList } from './article-list/article-list';
 
 @Component({
-  imports: [RouterOutlet, ArticleList, RouterLink],
+  imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
