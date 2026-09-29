@@ -1,1 +1,25 @@
-<p>article-details works!</p>
+<p> The parameter <code>value</code> read from the URL: {{ id_value }}</p>
+
+@if (article) {
+  <div class="container mt-5">
+    <h1>{{ article.title }}</h1>
+    <h4 class="text-muted">{{ article.subtitle }}</h4>
+    <p class="fw-bold">{{ article.category }}</p>
+
+    @if (article.image_data) {
+      <img class="img-fluid mb-3"
+           [src]="'data:' + article.image_media_type + ';base64,' + article.image_data">
+    }
+
+    <div [innerHTML]="article.body"></div>
+
+    <p class="text-muted mt-4">
+      Last modified: {{ article.update_date | date:'medium' }}
+      @if (article.username) {
+        by {{ article.username }}
+      }
+    </p>
+  </div>
+} @else {
+  <p>Loading article...</p>
+}
