@@ -1,6 +1,7 @@
+<li><input type="text" class="form-control mb-3" placeholder="Search articles" [(ngModel)]="term" [ngModelOptions]="{standalone: true}"></li>
 <div class="container mt-5">
   <div class="row">
-    @for (a of articles; track a.id) {
+    @for (a of articles| textpipe : term : ['id', 'show']; track a.id) {
       <div class="col-md-4 mb-4">
         <div class="card h-100 text-center">
 
