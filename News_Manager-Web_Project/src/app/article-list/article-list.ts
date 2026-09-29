@@ -18,6 +18,7 @@ import { ActivatedRoute,RouterLink } from '@angular/router';
   styleUrl: './article-list.css',
   templateUrl: './article-list.html',
 })
+
 export class ArticleList implements OnInit {
 
   article: Article = {
