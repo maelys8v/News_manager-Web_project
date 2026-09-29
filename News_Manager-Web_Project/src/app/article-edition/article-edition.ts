@@ -77,10 +77,23 @@ export class ArticleEdition implements OnInit {
   // }
 
   sendForm(): void {
-    this.articleService.createArticle(this.article);   // to push a COPY (otherwise when we reset it also resets inside the list)
-    this.cdr.detectChanges(); // to correct the delay issue when publishing
-    window.alert(`The article [${this.article.title}] has been published`);
-    this.clear();
+  
+    const { id, ...payload } = this.article;   
+
+
+    const newArticle = { ...payload, update_date: Date.now() } as Article;
+    this.articleService.createArticle(newArticle).subscribe({
+      next: (created) => {
+        console.log('Article created', created);
+        window.alert(`The article [${this.article.title}] has been published`);
+        this.clear();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('status:', err.status, 'body:', err.error);
+        window.alert(`Could not publish: ${err.status} ${JSON.stringify(err.error)}`);
+      }
+    });
   }
 
 
