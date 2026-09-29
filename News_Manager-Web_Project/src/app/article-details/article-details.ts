@@ -3,6 +3,8 @@ import { ActivatedRoute,RouterLink } from '@angular/router';
 import { Article } from '../interfaces/article';
 import { NewsService } from '../services/news';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   imports: [CommonModule, RouterLink],
@@ -14,16 +16,18 @@ export class ArticleDetails implements OnInit {
   id_value: string | null = '';
   article: Article | null = null;
 
-  constructor(private route: ActivatedRoute, private newsService: NewsService) {}
+  constructor(private route: ActivatedRoute, private newsService: NewsService, private cdr: ChangeDetectorRef, private sanitizer: DomSanitizer,) {}
   
   ngOnInit(): void {
     this.id_value = this.route.snapshot.paramMap.get('id');
-    
-    console.log(Object.keys(arguments))
+    console.log("init DETAIL")
+    console.log(this.id_value)
 
     this.newsService.getArticle(this.id_value).subscribe({
       next: (a) => {
         this.article = a;
+        console.log(this.article)
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
@@ -31,4 +35,9 @@ export class ArticleDetails implements OnInit {
       }
     });
   }
+
+  trustHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
 }

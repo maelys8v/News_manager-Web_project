@@ -6,7 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core'; // to correct the delay issue when publishing
 import { NewsService } from '../services/news'
 import { Observable, of } from 'rxjs';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute,RouterLink } from '@angular/router';
 
 
@@ -42,7 +42,8 @@ export class ArticleList implements OnInit {
     private cdr: ChangeDetectorRef, 
     private articleService : NewsService,
     private route: ActivatedRoute, 
-    private newsService: NewsService) {}
+    private newsService: NewsService,
+    private sanitizer: DomSanitizer) {}
   
   ngOnInit() {
     console.log('init');
@@ -89,6 +90,11 @@ export class ArticleList implements OnInit {
   clear(): void {
     this.articleForm.resetForm({ category: 'National' });
   }
+
+  trustHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
 }
 
 
