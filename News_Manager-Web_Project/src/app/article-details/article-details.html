@@ -11,7 +11,7 @@
            [src]="'data:' + article.image_media_type + ';base64,' + article.image_data">
     }
 
-    <div [innerHTML]="article.body"></div>
+    <div [innerHTML]="trustHtml(article.body)"></div>
 
     <p class="text-muted mt-4">
       Last modified: {{ article.update_date | date:'medium' }}

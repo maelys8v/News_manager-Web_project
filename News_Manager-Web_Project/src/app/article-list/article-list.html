@@ -18,7 +18,7 @@
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ a.subtitle }}</h6>
             <p class="fw-bold">{{ a.category }}</p>
-            <p class="card-text" [innerHTML]="a.abstract"></p>
+            <p class="card-text" [innerHTML]="trustHtml(a.abstract)"></p>
           </div>
 
           <div class="card-footer">
