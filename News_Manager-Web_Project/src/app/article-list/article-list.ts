@@ -8,11 +8,12 @@ import { NewsService } from '../services/news'
 import { Observable, of } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute,RouterLink } from '@angular/router';
+import { TextpipePipe } from '../pipes/text-pipe-pipe';
 
 
 
 @Component({
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TextpipePipe],
   standalone: true,
   selector: 'app-article-list',
   styleUrl: './article-list.css',
@@ -35,6 +36,7 @@ export class ArticleList implements OnInit {
   private allArticles: Article[] = [];
   articles: Article[] = [];
   private category: string | null = null;
+  term: string = ""
 
   @ViewChild('articleForm') articleForm: any;
 
