@@ -7,7 +7,7 @@ import { Highlight } from '../directives/highlight'
 import { ChangeDetectorRef } from '@angular/core'; // to correct the delay issue when publishing
 import { NewsService } from '../services/news'
 import { Observable, of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class ArticleEdition implements OnInit {
     };
 
   articles: Article[] = []; 
+  id_value: string | null = '';
 
 
   @ViewChild('articleForm') articleForm: any;
@@ -38,51 +39,54 @@ export class ArticleEdition implements OnInit {
   constructor(private cdr: ChangeDetectorRef, 
     private articleService : NewsService,
     private route: ActivatedRoute, 
+    private router: Router,
     private newsService: NewsService) { // ChangeDetectorRef to correct the delay issue when publishing
     
     
   }
 
   ngOnInit() {
-    console.log('init');
-    
-    // load once
-    this.newsService.getArticles().subscribe({
-      next: (list) => {
-        console.log('réponse API :', list);
-        console.log(Object.keys(list[0]));
-        this.articles = list;
+     this.route.paramMap.subscribe(params => {
+      this.id_value = params.get('id');
+
+      if (this.id_value) {
+        this.newsService.getArticle(this.id_value).subscribe({
+      next: (a) => {
+        this.article = a;
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
-        window.alert('Impossible de charger les articles');
+        window.alert('Impossible de charger cet article');
+        this.id_value = null;
+        this.article = this.emptyArticle();
+        this.router.navigate(['/articles/new']);   // adjust to your route
+      },
+    });
+      } else {
+        this.article = this.emptyArticle();
       }
     });
-
-    // react every time the URL category changes
-   // this.route.paramMap.subscribe(params => {
-     // this.article.category = params.get('category');   // null on /list
-     // this.cdr.detectChanges();
-    //});
   }
-
-  // sendForm(): void {
-  //   window.alert("Received information: " 
-  //     + this.article.title + " " 
-  //     + this.article.subtitle + " " 
-  //     + this.article.body + " " 
-  //     + this.article.abstract + " " 
-  //     + this.article.category);
-  // }
 
   sendForm(): void {
   
-    const { id, ...payload } = this.article;   
+      
+    
 
-
-    const newArticle = { ...payload, update_date: Date.now() } as Article;
-    this.articleService.createArticle(newArticle).subscribe({
+    if (this.id_value) {
+    const updatedArticle = { ...this.article, update_date: Date.now() } as Article;
+    this.newsService.updateArticle(updatedArticle).subscribe({
+      next: () => {
+        window.alert(`The article [${this.article.title}] has been updated`);
+        this.router.navigate(['/']);   // wherever your list lives
+      },
+      error: (err) => window.alert(`Could not update: ${err.status} ${JSON.stringify(err.error)}`),
+    });
+    } else {
+      const { id, ...payload } = this.article; 
+      const newArticle = { ...payload, update_date: Date.now() } as Article;
+      this.articleService.createArticle(newArticle).subscribe({
       next: (created) => {
         console.log('Article created', created);
         window.alert(`The article [${this.article.title}] has been published`);
@@ -94,11 +98,27 @@ export class ArticleEdition implements OnInit {
         window.alert(`Could not publish: ${err.status} ${JSON.stringify(err.error)}`);
       }
     });
+    }
+
+    
   }
 
+   private emptyArticle(): Article {
+    return {
+      title: '',
+      subtitle: '',
+      body: '',
+      abstract: '',
+      category: 'National',
+      id: '',
+      id_user: '',
+      update_date: Date.now(),
+    };
+  }
 
   clear(): void {
-    this.articleForm.resetForm({ category: 'National' });
+    this.articleForm.resetForm();
+    this.article = this.emptyArticle();
   }
 }
 
