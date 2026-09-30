@@ -25,7 +25,7 @@
           <div class="card-footer">
             <button class="btn btn-edit btn-sm me-1"
                     [routerLink]="['/edit', a.id]">Edit</button>
-            <button class="btn btn-remove btn-sm">Remove</button>
+            <button class="btn btn-remove btn-sm" (click)="removeArticle(a)">Remove</button>
           </div>
 
         </div>

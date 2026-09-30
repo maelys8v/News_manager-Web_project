@@ -1,0 +1,41 @@
+.form-control.ng-valid   { border: 10px solid rgb(0, 166, 0); }
+.form-control.ng-invalid { border: 10px solid rgb(255, 221, 83); }
+.btn-edit {
+  background-color: #67A2C5;
+  border-color: #67A2C5;
+  color: #000;
+}
+.btn-edit:hover {
+  background-color: #507d97;
+  border-color: #507d97;
+  color: #000;
+}
+
+.btn-remove {
+  background-color: #FFB6A6;
+  border-color: #FFB6A6;
+  color: #000;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.btn-remove:hover {
+  background-color: #8f5d52;
+  border-color: #8f5d52;
+  color: #000;
+}
+.btn-publish {
+  background-color: #9BCEC1;
+  border-color: #9BCEC1;
+  color: #000;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.btn-publish:hover {
+  background-color: #6f948b;
+  border-color: #6f948b;
+  color: #000;
+}

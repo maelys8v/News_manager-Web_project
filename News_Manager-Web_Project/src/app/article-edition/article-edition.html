@@ -1,8 +1,6 @@
-<p>article-edition works!</p>
+<h2 left style="margin-left: 100px;"s> Edit Article </h2>
 
-<h2> Article form </h2>
-
-<form #articleForm="ngForm" (ngSubmit)="sendForm()">
+<form #articleForm="ngForm" (ngSubmit)="sendForm()" left style="margin-left: 100px;  margin-right: 100px">
     
     <div class="form-group">
         <label> Title: </label>
@@ -93,8 +91,8 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="articleForm.invalid" mt-2 me-2>Publish</button>
-    <button type="button" class="btn btn-secondary" (click)="clear()">Reset</button>
+    <button type="submit" class="btn btn-publish" [disabled]="articleForm.invalid" >Publish</button>
+    <button type="button" class="btn btn-remove" (click)="clear()">Reset</button>
 
     @if (articleForm.invalid) {
         <div><small class="text-muted">Please fill in the form correctly before publishing.</small></div>
@@ -103,14 +101,14 @@
 
 
 
-<div class="row">
-    <div class="col-md-4 mb-3">
+<div class="row" left style="margin-left: 100px;  margin-right: 100px">
+    <div class="col-md-12 mb-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ article.title }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ article.subtitle }}</h6>
-          <p class="card-text">{{ article.abstract }}</p>
-          <div [innerHTML]="article.body"></div>
+          <div [innerHTML]="article.abstract" mb-2></div>
+          <div [innerHTML]="article.body" mb-2></div>
           <p class="fw-bold">{{ article.category }}</p>
         </div>
       </div>

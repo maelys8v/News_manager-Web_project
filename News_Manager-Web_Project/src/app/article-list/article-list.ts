@@ -88,6 +88,21 @@ export class ArticleList implements OnInit {
   }
 
 
+  removeArticle(article: Article): void {
+    if (window.confirm(`Are you sure you want to delete the article "${article.title}"?`)) {
+      this.newsService.deleteArticle(article).subscribe({
+        next: () => {
+          this.allArticles = this.allArticles.filter(a => a.id !== article.id);
+          this.applyFilter();
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error(err); 
+          window.alert('Impossible de supprimer l\'article');
+        }
+      });
+    }
+  }
 
   clear(): void {
     this.articleForm.resetForm({ category: 'National' });
