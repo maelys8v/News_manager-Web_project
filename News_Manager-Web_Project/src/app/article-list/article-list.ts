@@ -31,6 +31,7 @@ export class ArticleList implements OnInit {
     id: "",
     id_user:"",
     update_date: Date.now(),
+    image_media_type: "",
   };
 
   private allArticles: Article[] = [];

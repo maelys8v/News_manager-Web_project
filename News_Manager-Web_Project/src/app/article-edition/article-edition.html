@@ -11,11 +11,11 @@
             name="aTitle" 
             #aTitle="ngModel"
             minlength="10"
-            maxlength="50"
+            maxlength="100"
             [ngClass]="aTitle.valid || aTitle.pristine ? '': 'bg-danger'"
         >
-        @if (article.title.length === 50) {
-        <small class="text-warning">Maximum 50 characters reached.</small>
+        @if (article.title.length === 100) {
+        <small class="text-warning">Maximum 100 characters reached.</small>
         }
 
         @if (aTitle.invalid && aTitle.dirty) {
@@ -35,12 +35,12 @@
             name="aSubtitle" 
             #aSubtitle="ngModel"
             minlength="10"
-            maxlength="50"
+            maxlength="200"
             [ngClass]="aSubtitle.valid || aSubtitle.pristine ? '': 'bg-danger'"
         >
 
-        @if (article.subtitle.length === 50) {
-            <small class="text-warning">Maximum 50 characters reached.</small>
+        @if (article.subtitle.length === 200) {
+            <small class="text-warning">Maximum 200 characters reached.</small>
         }
         @if (aSubtitle.invalid && aSubtitle.dirty) {
             <div class="text-danger">
@@ -91,8 +91,36 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-publish" [disabled]="articleForm.invalid" >Publish</button>
-    <button type="button" class="btn btn-remove" (click)="clear()">Reset</button>
+    
+
+    
+    <input
+    #imageInput
+    type="file"
+    accept="image/png, image/jpeg"
+    (change)="fileChangeEvent($event)"
+    hidden
+    />
+
+
+     @if (!isImageSaved) {
+    <button type="button" class = "btn btn-publish" (click)="addImage()">Add image</button>
+    }
+
+
+    @if (imageError) {
+    <p class="error">{{ imageError }}</p>
+    }
+
+    @if (isImageSaved) {
+    <button type="button" class="btn btn-remove" (click)="removeImage()">Remove image</button>
+    }
+
+    <div>
+        <button type="submit" class="btn btn-publish" [disabled]="articleForm.invalid" >Publish</button>
+        <button type="button" class="btn btn-remove" (click)="clear()">Reset</button>
+    </div>
+    
 
     @if (articleForm.invalid) {
         <div><small class="text-muted">Please fill in the form correctly before publishing.</small></div>
@@ -105,11 +133,15 @@
     <div class="col-md-12 mb-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{ article.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ article.subtitle }}</h6>
-          <div [innerHTML]="article.abstract" mb-2></div>
-          <div [innerHTML]="article.body" mb-2></div>
-          <p class="fw-bold">{{ article.category }}</p>
+            <h5 class="card-title">{{ article.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ article.subtitle }}</h6>
+            <div [innerHTML]="article.abstract" mb-2></div>
+            @if (article.image_data) {
+            <img class="img-fluid mb-3"
+                [src]="'data:' + article.image_media_type + ';base64,' + article.image_data">
+            }
+            <div [innerHTML]="article.body" mb-2></div>
+            <p class="fw-bold">{{ article.category }}</p>
         </div>
       </div>
     </div>

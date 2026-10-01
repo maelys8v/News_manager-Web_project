@@ -1,5 +1,5 @@
-.form-control.ng-valid   { border: 10px solid rgb(0, 166, 0); }
-.form-control.ng-invalid { border: 10px solid rgb(255, 221, 83); }
+.form-control.ng-valid   { border: 5px solid #9BCEC1; }
+.form-control.ng-invalid { border: 5px solid #fce4b2; }
 .btn-edit {
   background-color: #67A2C5;
   border-color: #67A2C5;
