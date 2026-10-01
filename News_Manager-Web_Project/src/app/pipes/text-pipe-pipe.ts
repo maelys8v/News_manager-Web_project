@@ -3,7 +3,7 @@ import { Article } from '../interfaces/article';
 
 @Pipe({
   name: 'textpipe',
-  pure: false
+  pure: true // Si pur, Angular recalcule seulement quand les arguments changent de valeur
 })
 export class TextpipePipe implements PipeTransform {
   transform(items: any, term: string, excludes: any = []): any {

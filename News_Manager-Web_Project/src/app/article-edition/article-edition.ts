@@ -62,7 +62,8 @@ export class ArticleEdition implements OnInit {
       if (this.id_value) {
         this.newsService.getArticle(this.id_value).subscribe({
       next: (a) => {
-        this.article = a;
+        //this.article = a;
+        this.article = { ...a };
         if (this.article.image_data) {
           this.cardImageBase64 = 'data:' + this.article.image_media_type + ';base64,' + this.article.image_data;
           this.isImageSaved = true;

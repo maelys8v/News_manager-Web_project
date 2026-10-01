@@ -7,18 +7,20 @@
             <span class="line line3"></span>
         </div>
         <ul class="menu-items">
+            <li><h1 class="logo">News Paper</h1></li>
             <li><a routerLink="/list">Main Page</a></li>
             <li><a routerLink="/list">All Categories</a></li>
             <li><a routerLink="/list/national">National</a></li>
             <li><a routerLink="/list/technology">Technology</a></li>
             <li><a routerLink="/list/economy">Economy</a></li>
             <li><a routerLink="/list/sports">Sports</a></li>
+            <li>
+                <input type="text" class="form-control mb-3" placeholder="Search articles"
+                    [ngModel]="term()"
+                    (ngModelChange)="onSearch($event)"
+                    name="search">
+            </li>
         </ul>
-
-
-
-<router-outlet></router-outlet>
-        <h1 class="logo">News Paper</h1>
     </div>
 </nav>
 

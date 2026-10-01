@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute,RouterLink } from '@angular/router';
 import { TextpipePipe } from '../pipes/text-pipe-pipe';
+import { signal } from '@angular/core';
 
 
 
@@ -37,7 +38,8 @@ export class ArticleList implements OnInit {
   private allArticles: Article[] = [];
   articles: Article[] = [];
   private category: string | null = null;
-  term: string = ""
+  //term: string = ""
+  term = signal('');
 
   @ViewChild('articleForm') articleForm: any;
 
@@ -54,8 +56,6 @@ export class ArticleList implements OnInit {
     // load once
     this.newsService.getArticles().subscribe({
       next: (list) => {
-        console.log('réponse API :', list);
-        console.log(Object.keys(list[0]));
         this.allArticles = list;
         this.applyFilter();
         this.cdr.detectChanges();
@@ -72,6 +72,14 @@ export class ArticleList implements OnInit {
       this.applyFilter();
       this.cdr.detectChanges();
     });
+
+    // filter search
+    this.route.queryParamMap.subscribe(params=>{
+      console.log('q reçu :', params.get('q'));
+      this.term.set(params.get('q') ?? '');
+      this.applyFilter()
+      this.cdr.detectChanges();
+    })
   }
 
   private applyFilter() {
