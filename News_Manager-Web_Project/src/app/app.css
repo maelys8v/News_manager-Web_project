@@ -40,15 +40,20 @@
     align-items: center;
 }
 
-.menu-items{
-    order: 2;
-    display: flex;
-}
 .logo{
     order: 1;
     font-size: 2.3rem;
-    position: absolute;
-    left: 100px;
+}
+
+.menu-items{
+    order: 2;
+    display: flex;
+    align-items: center;   /* vertically centers the input with the links */
+}
+
+.menu-items input{
+    width: 220px;          /* form-control defaults to 100% */
+    margin: 0;
 }
 
 .menu-items li{

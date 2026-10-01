@@ -6,21 +6,27 @@
             <span class="line line2"></span>
             <span class="line line3"></span>
         </div>
-        <ul class="menu-items">
-            <li><h1 class="logo">News Paper</h1></li>
-            <li><a routerLink="/list">Main Page</a></li>
-            <li><a routerLink="/list">All Categories</a></li>
-            <li><a routerLink="/list/national">National</a></li>
-            <li><a routerLink="/list/technology">Technology</a></li>
-            <li><a routerLink="/list/economy">Economy</a></li>
-            <li><a routerLink="/list/sports">Sports</a></li>
-            <li>
-                <input type="text" class="form-control mb-3" placeholder="Search articles"
-                    [ngModel]="term()"
-                    (ngModelChange)="onSearch($event)"
-                    name="search">
-            </li>
-        </ul>
+       <div class="navbar-container">
+    <input type="checkbox">
+    <div class="hamburger-lines">...</div>
+
+    <h1 class="logo">News Paper</h1>
+
+    <ul class="menu-items">
+        <li>
+            <input type="text" class="form-control" placeholder="Search articles"
+                [ngModel]="term()"
+                (ngModelChange)="onSearch($event)"
+                name="search">
+        </li>
+        <li><a routerLink="/list">Main Page</a></li>
+        <li><a routerLink="/list">All Categories</a></li>
+        <li><a routerLink="/list/national">National</a></li>
+        <li><a routerLink="/list/technology">Technology</a></li>
+        <li><a routerLink="/list/economy">Economy</a></li>
+        <li><a routerLink="/list/sports">Sports</a></li>
+    </ul>
+</div>
     </div>
 </nav>
 
@@ -33,7 +39,7 @@
 <br>
 
 <!-- <button type="button" class="btn btn-add" style="margin-left: 100px;" (click)="clear()">Create new article (link to a form)</button> -->
-<a routerLink="/edit/-1">Create new article</a>
+
 
 
 <!-- <h6>router-outlet</h6> -->

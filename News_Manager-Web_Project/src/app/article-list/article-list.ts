@@ -7,14 +7,14 @@ import { ChangeDetectorRef } from '@angular/core'; // to correct the delay issue
 import { NewsService } from '../services/news'
 import { Observable, of } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute,RouterLink } from '@angular/router';
+import { ActivatedRoute,Router,RouterLink, RouterOutlet } from '@angular/router';
 import { TextpipePipe } from '../pipes/text-pipe-pipe';
 import { signal } from '@angular/core';
 
 
 
 @Component({
-  imports: [CommonModule, FormsModule, RouterLink, TextpipePipe],
+  imports: [CommonModule, FormsModule, RouterLink, TextpipePipe, RouterOutlet],
   standalone: true,
   selector: 'app-article-list',
   styleUrl: './article-list.css',
@@ -48,10 +48,20 @@ export class ArticleList implements OnInit {
     private articleService : NewsService,
     private route: ActivatedRoute, 
     private newsService: NewsService,
-    private sanitizer: DomSanitizer) {}
+    private sanitizer: DomSanitizer,
+    private router: Router  
+  ) {}
   
+ 
+  
+
+
   ngOnInit() {
     console.log('init');
+
+    this.route.queryParamMap.subscribe(params => {
+      this.term.set(params.get('q') ?? '');
+    });
     
     // load once
     this.newsService.getArticles().subscribe({
