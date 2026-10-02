@@ -6,13 +6,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Highlight } from '../directives/highlight'
 import { ChangeDetectorRef } from '@angular/core'; // to correct the delay issue when publishing
 import { NewsService } from '../services/news'
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import * as _ from 'lodash'
 
 
 
 @Component({
-  imports: [CommonModule, FormsModule, Highlight],
+  imports: [CommonModule, FormsModule, Highlight, RouterModule],
   standalone: true,
   selector: 'app-article-edition',
   styleUrl: './article-edition.css',
